@@ -69,8 +69,10 @@ module PoiseLanguages
       # @return [void]
       def action_install
         notifying_block do
-          install_scl_repo
-          flush_yum_cache
+          if Chef::Provider::Package::Yum::YumCache.instance.available_version(new_resource.package_name).nil?
+            install_scl_repo
+            flush_yum_cache
+          end
           install_scl_package(:install)
           install_scl_devel_package(:install) if new_resource.dev_package
         end
@@ -81,8 +83,10 @@ module PoiseLanguages
       # @return [void]
       def action_upgrade
         notifying_block do
-          install_scl_repo
-          flush_yum_cache
+          if Chef::Provider::Package::Yum::YumCache.instance.available_version(new_resource.package_name).nil?
+            install_scl_repo
+            flush_yum_cache
+          end
           install_scl_package(:upgrade)
           install_scl_devel_package(:upgrade) if new_resource.dev_package
         end
