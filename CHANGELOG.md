@@ -1,5 +1,9 @@
 # Changelog
 
+## v2.2.0 (ndpgroup/poise-languages)
+
+* Do not mess with scl repos if package is already available
+
 ## v2.1.2
 
 * Drop support for Chef that uses Ruby 2.1 (<= 12.13).
